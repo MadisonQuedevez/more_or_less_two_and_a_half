@@ -6,11 +6,8 @@ st.markdown("<h2 style='text-align: center;'>More or Less: 2.5 Goals</h2>", unsa
 st.markdown("<h4 style='text-align: center;'>Um app para estimativa e separação dos jogos</h4>", unsafe_allow_html=True)
 st.divider()
 
-# Criando a caixa de seleção de data
-data = st.date_input("Selecione uma data", date.today())
-
-# Exibindo a data selecionada
-st.write("Você selecionou a data:", data)
+# Criando a caixa de seleção de data com largura e altura personalizadas
+data = st.date_input("Selecione uma data", date.today(), width=150, height=50)
 
 
 """
