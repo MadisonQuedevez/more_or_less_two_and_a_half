@@ -1,4 +1,4 @@
-pip install streamlit-datepicker
+!pip install streamlit-datepicker
 
 
 import streamlit as st
