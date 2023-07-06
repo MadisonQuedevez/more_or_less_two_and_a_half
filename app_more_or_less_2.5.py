@@ -16,13 +16,12 @@ data = st.date_input("Selecione uma data", date.today(), key=data_key)
 # Usando CSS para ajustar o tamanho da caixa de seleção de data
 st.markdown(f"""<style>
         #{data_key} {{
-            width: 150px;
-            height: 50px;
+            width: 50px;
+            height: 40px;
         }}
     </style>""", unsafe_allow_html=True)
 
-# Exibindo a data selecionada
-st.write("Você selecionou a data:", data)
+
 
 
 
