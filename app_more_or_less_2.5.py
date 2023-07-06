@@ -1,6 +1,3 @@
-!pip install streamlit-datepicker
-
-
 import streamlit as st
 from datetime import date
 from streamlit_datepicker import st_date_input
@@ -11,12 +8,22 @@ st.markdown("<h4 style='text-align: center;'>Um app para estimativa e separaçã
 st.divider()
 
 
-# Criando a caixa de seleção de data com largura e altura personalizadas
-data = st_date_input("Selecione uma data", date.today(), key="data", width=150, height=50)
+# Definindo um identificador para a caixa de seleção de data
+data_key = 'my_date_input'
+
+# Criando a caixa de seleção de data com um identificador único
+data = st.date_input("Selecione uma data", date.today(), key=data_key)
+
+# Usando CSS para ajustar o tamanho da caixa de seleção de data
+st.markdown(f"""<style>
+        #{data_key} {{
+            width: 150px;
+            height: 50px;
+        }}
+    </style>""", unsafe_allow_html=True)
 
 # Exibindo a data selecionada
-st.write("Data selecionada:", data)
-
+st.write("Você selecionou a data:", data)
 
 
 
