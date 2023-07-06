@@ -28,9 +28,6 @@ selected_area = st.selectbox('Selecione uma área', areas)
 # Usando a área selecionada para filtrar os dados que você deseja exibir
 filtered_data = [area for area in data if area['Name'] == selected_area]
 
-# Exibindo os dados filtrados
-st.write(filtered_data)
-
 
 
 
