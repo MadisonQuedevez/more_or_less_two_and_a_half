@@ -11,8 +11,6 @@ st.divider()
 # Criando a caixa de seleção de data
 data = st.date_input("Selecione uma data", date.today())
 
-
-
 # Fazendo uma solicitação GET para o endpoint
 response = requests.get('https://api.sportsdata.io/v4/soccer/scores/json/Areas?key=594352b9547d44d698c51b234bf5f24f')
 
@@ -25,9 +23,31 @@ areas = [area['Name'] for area in data]
 # Criando um seletor para as áreas
 selected_area = st.selectbox('Selecione uma área', areas)
 
-# Usando a área selecionada para filtrar os dados que você deseja exibir
-filtered_data = [area for area in data if area['Name'] == selected_area]
+# Endpoint da API
+endpoint = "https://api.sportsdata.io/v4/soccer/stats/json/BoxScoresByDate/{competition}/{date}?key=594352b9547d44d698c51b234bf5f24f"
 
+# Dados de exemplo
+competition = "example"  # Substitua "example" pelo nome da competição desejada
+
+# Montando a URL do endpoint com os parâmetros
+url = endpoint.format(competition=competition, date=data)
+
+# Fazendo a requisição HTTP
+response = requests.get(url)
+
+if response.status_code == 200:
+    # Obtendo os dados da resposta
+    data = response.json()
+
+    # Filtrando os dados com base na área selecionada
+    dados_filtrados = [placar for placar in data if placar['area'] == selected_area]
+
+    # Exibindo os placares filtrados
+    st.write("Placares:")
+    for placar in dados_filtrados:
+        st.write(placar['data'], placar['area'], placar['placar'])
+else:
+    st.write("Erro ao obter os dados dos placares. Status:", response.status_code)
 
 
 
