@@ -1,7 +1,7 @@
 import streamlit as st
 import requests
 import pandas as pd
-import plotly.graph_objects as go
+import plotly.express as px
 
 # Função para carregar a base de dados (com cache)
 @st.cache(allow_output_mutation=True)
@@ -15,20 +15,21 @@ def load_base():
 df = load_base()
 
 # Filtros
-min_H = st.sidebar.number_input("FT_Odd_H", min_value=1.01, max_value=10.0, value=1.01)
-max_H = st.sidebar.number_input("FT_Odd_H", min_value=1.01, max_value=10.0, value=10.0)
+st.header("Filtros")
+min_H = st.number_input("FT_Odd_H", min_value=1.01, max_value=10.0, value=1.01)
+max_H = st.number_input("FT_Odd_H", min_value=1.01, max_value=10.0, value=10.0)
 
-min_D = st.sidebar.number_input("FT_Odd_D", min_value=1.01, max_value=10.0, value=1.01)
-max_D = st.sidebar.number_input("FT_Odd_D", min_value=1.01, max_value=10.0, value=10.0)
+min_D = st.number_input("FT_Odd_D", min_value=1.01, max_value=10.0, value=1.01)
+max_D = st.number_input("FT_Odd_D", min_value=1.01, max_value=10.0, value=10.0)
 
-min_A = st.sidebar.number_input("FT_Odd_A", min_value=1.01, max_value=10.0, value=1.01)
-max_A = st.sidebar.number_input("FT_Odd_A", min_value=1.01, max_value=10.0, value=10.0)
+min_A = st.number_input("FT_Odd_A", min_value=1.01, max_value=10.0, value=1.01)
+max_A = st.number_input("FT_Odd_A", min_value=1.01, max_value=10.0, value=10.0)
 
-min_Over25 = st.sidebar.number_input("FT_Odd_Over25", min_value=1.01, max_value=10.0, value=1.01)
-max_Over25 = st.sidebar.number_input("FT_Odd_Over25", min_value=1.01, max_value=10.0, value=10.0)
+min_Over25 = st.number_input("FT_Odd_Over25", min_value=1.01, max_value=10.0, value=1.01)
+max_Over25 = st.number_input("FT_Odd_Over25", min_value=1.01, max_value=10.0, value=10.0)
 
-min_BTTS = st.sidebar.number_input("FT_Odd_BTTS_Yes", min_value=1.01, max_value=10.0, value=1.01)
-max_BTTS = st.sidebar.number_input("FT_Odd_BTTS_Yes", min_value=1.01, max_value=10.0, value=10.0)
+min_BTTS = st.number_input("FT_Odd_BTTS_Yes", min_value=1.01, max_value=10.0, value=1.01)
+max_BTTS = st.number_input("FT_Odd_BTTS_Yes", min_value=1.01, max_value=10.0, value=10.0)
 
 # Filtrar o dataframe
 df_filtrado = df[(df['FT_Odd_H'] >= min_H) & (df['FT_Odd_H'] <= max_H) &
@@ -46,18 +47,7 @@ profit = round(df_filtrado['Profit_acu'].tail(1).item(), 2)
 ROI = round((df_filtrado['Profit_acu'].tail(1) / len(df_filtrado) * 100).item(), 2)
 
 # Exibir o gráfico com o profit acumulado usando Plotly
-fig = go.Figure(data=go.Scatter(x=df_filtrado.index, y=df_filtrado['Profit_acu']))
-fig.update_layout(title="Back Home", xaxis_title="Entradas", yaxis_title="Stakes")
+fig = px.line(df_filtrado, x=df_filtrado.index, y='Profit_acu', title="Back Home")
 st.plotly_chart(fig)
 st.write("Profit:", profit, "stakes em", len(df_filtrado), "jogos")
 st.write("ROI:", ROI, "%")
-
-
-"""
-
----
-###### Minhas Redes:
-Visite o meu [Linkedin](https://www.linkedin.com/MadisonQuedevez "Linkedin Oficial do Criador")
-
-
-"""
