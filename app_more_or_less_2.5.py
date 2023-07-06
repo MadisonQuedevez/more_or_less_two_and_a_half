@@ -7,19 +7,10 @@ st.markdown("<h4 style='text-align: center;'>Um app para estimativa e separaçã
 st.divider()
 
 
-# Definindo um identificador para a caixa de seleção de data
-data_key = 'my_date_input'
+# Criando a caixa de seleção de data
+data = st.date_input("Selecione uma data", date.today())
 
-# Criando a caixa de seleção de data com um identificador único
-data = st.date_input("Selecione uma data", date.today(), key=data_key)
 
-# Usando CSS para ajustar o tamanho da caixa de seleção de data
-st.markdown(f"""<style>
-        #{data_key} {{
-            width: 50px;
-            height: 40px;
-        }}
-    </style>""", unsafe_allow_html=True)
 
 
 
