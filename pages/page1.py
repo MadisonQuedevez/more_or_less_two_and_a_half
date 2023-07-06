@@ -1,7 +1,7 @@
 import streamlit as st
 import requests
 import pandas as pd
-import matplotlib.pyplot as plt
+import plotly.graph_objects as go
 
 # Função para carregar a base de dados (com cache)
 @st.cache(allow_output_mutation=True)
@@ -45,10 +45,13 @@ df_filtrado.index += 1
 profit = round(df_filtrado['Profit_acu'].tail(1).item(), 2)
 ROI = round((df_filtrado['Profit_acu'].tail(1) / len(df_filtrado) * 100).item(), 2)
 
-# Exibir o gráfico com o profit acumulado
-st.line_chart(df_filtrado['Profit_acu'])
+# Exibir o gráfico com o profit acumulado usando Plotly
+fig = go.Figure(data=go.Scatter(x=df_filtrado.index, y=df_filtrado['Profit_acu']))
+fig.update_layout(title="Back Home", xaxis_title="Entradas", yaxis_title="Stakes")
+st.plotly_chart(fig)
 st.write("Profit:", profit, "stakes em", len(df_filtrado), "jogos")
 st.write("ROI:", ROI, "%")
+
 
 """
 
