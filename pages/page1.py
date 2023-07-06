@@ -6,11 +6,7 @@ import matplotlib.pyplot as plt
 
 
 #criando o contéudo da página principal
-st.markdown("<h1 style='text-align: center;'>More or Less: 2.5 Goals</h1>", unsafe_allow_html=True)
-st.markdown("<h2 style='text-align: center;'>Um app para estimativa e separação dos jogos</h2>", unsafe_allow_html=True)
-
-st.title("Software de Backtesting")
-
+st.markdown("<h1 style='text-align: center;'>Backtesting</h1>", unsafe_allow_html=True)
 
 @st.cache(allow_output_mutation=True)
 def load_base():
