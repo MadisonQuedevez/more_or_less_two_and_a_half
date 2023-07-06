@@ -1,6 +1,5 @@
 import streamlit as st
 from datetime import date
-from streamlit_datepicker import st_date_input
 
 
 st.markdown("<h2 style='text-align: center;'>More or Less: 2.5 Goals</h2>", unsafe_allow_html=True)
