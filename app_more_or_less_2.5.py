@@ -1,4 +1,5 @@
 import streamlit as st
+import requests
 from datetime import date
 
 
@@ -12,6 +13,23 @@ data = st.date_input("Selecione uma data", date.today())
 
 
 
+# Fazendo uma solicitação GET para o endpoint
+response = requests.get('https://api.sportsdata.io/v4/soccer/scores/json/Areas?key=594352b9547d44d698c51b234bf5f24f')
+
+# Analisando a resposta JSON
+data = response.json()
+
+# Extraindo a lista de áreas
+areas = [area['Name'] for area in data]
+
+# Criando um seletor para as áreas
+selected_area = st.selectbox('Selecione uma área', areas)
+
+# Usando a área selecionada para filtrar os dados que você deseja exibir
+filtered_data = [area for area in data if area['Name'] == selected_area]
+
+# Exibindo os dados filtrados
+st.write(filtered_data)
 
 
 
